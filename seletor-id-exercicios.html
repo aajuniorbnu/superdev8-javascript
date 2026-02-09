@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Seletor por ID - Exercícios</title>
+</head>
+<body>
+
+    <h1>Agendamento de Consulta Veterinária</h1>
+
+    <!-- Campos do formulário -->
+    <label>Nome do animal:</label><br>
+    <input type="text" id="nome-pet"><br><br>
+
+    <label>Data da consulta:</label><br>
+    <input type="date" id="data-consulta"><br><br>
+
+    <label>Tipo de animal:</label><br>
+    <select id="tipo">
+        <option value="">Selecione</option>
+        <option value="Capivara">Capivara</option>
+        <option value="Cachorro">Cachorro</option>
+        <option value="Gato">Gato</option>
+    </select><br><br>
+
+    <label>Idade do animal:</label><br>
+    <input type="number" id="idade"><br><br>
+
+    <button id="agendar-consulta" onclick="agendarConsulta()">
+        Agendar consulta
+    </button>
+
+    <!-- Chamada do JS -->
+    <script src="assets/js/seletor-id-exercicios.js"></script>
+</body>
+</html>
