@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=DM+Mono:wght@400;500&display=swap');
+
+/* ─── Reset ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* ─── Variáveis ──────────────────────────────────────── */
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-mono:    'DM Mono', monospace;
+
+  --bg:           #f5f5f4;   /* stone-100  */
+  --white:        #ffffff;
+  --border:       #e7e5e4;   /* stone-200  */
+  --border-focus: #34d399;   /* emerald-400 */
+  --ring-focus:   rgba(52, 211, 153, 0.15);
+
+  --text-900:     #1c1917;   /* stone-900  */
+  --text-700:     #44403c;   /* stone-700  */
+  --text-400:     #a8a29e;   /* stone-400  */
+  --text-300:     #d6d3d1;   /* stone-300  */
+
+  --emerald-50:   #ecfdf5;
+  --emerald-200:  #a7f3d0;
+  --emerald-400:  #34d399;
+  --emerald-500:  #10b981;
+  --emerald-600:  #059669;
+
+  --amber-50:     #fffbeb;
+  --amber-500:    #f59e0b;
+
+  --stone-50:     #fafaf9;
+  --stone-100:    #f5f5f4;
+
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card:  0 4px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 6px 20px rgba(52,211,153,0.15);
+
+  --radius-sm:    0.75rem;   /* 12px */
+  --radius-md:    1rem;      /* 16px */
+  --radius-lg:    1.5rem;    /* 24px */
+  --radius-xl:    1.875rem;  /* 30px */
+  --radius-full:  9999px;
+}
+
+/* ─── Página ─────────────────────────────────────────── */
+body {
+  font-family: var(--font-mono);
+  background-color: var(--bg);
+  color: var(--text-900);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem 4rem;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background:
+    radial-gradient(circle at 65% 8%,  #d1fae5 0%, transparent 50%),
+    radial-gradient(circle at 8%  85%, #fef3c7 0%, transparent 50%);
+}
+
+/* ─── Wrapper ────────────────────────────────────────── */
+.converter-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ─── Header ─────────────────────────────────────────── */
+.converter-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.converter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--emerald-50);
+  border: 1px solid var(--emerald-200);
+  color: var(--emerald-600);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.converter-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--emerald-400);
+  border-radius: 50%;
+}
+
+.converter-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-900);
+  margin-bottom: 0.5rem;
+}
+
+.converter-title span {
+  color: var(--emerald-500);
+}
+
+.converter-subtitle {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--text-400);
+}
+
+/* ─── Card principal ─────────────────────────────────── */
+.converter-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── Label genérico ─────────────────────────────────── */
+.field-label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--text-400);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+/* ─── Input BRL ──────────────────────────────────────── */
+.brl-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--stone-50);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.brl-input-wrap:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--ring-focus);
+}
+
+.brl-prefix {
+  padding: 0 1rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--amber-500);
+  background: var(--amber-50);
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.brl-input {
+  flex: 1;
+  height: 3.5rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-900);
+  padding: 0 1.25rem;
+  width: 100%;
+}
+
+/* ─── Grid de moedas ─────────────────────────────────── */
+.currencies-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+/* ─── Card de moeda ──────────────────────────────────── */
+.currency-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.currency-card:hover {
+  border-color: var(--emerald-400);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.currency-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: var(--emerald-400);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.currency-card:hover::before {
+  opacity: 1;
+}
+
+.currency-flag {
+  font-size: 1.5rem;
+  line-height: 1;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.currency-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.currency-code {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--text-400);
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.currency-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-900);
+}
+
+.currency-symbol {
+  font-size: 0.7rem;
+  color: var(--text-400);
+  margin-right: 1px;
+}
+
+.currency-copy-hint {
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--text-300);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.currency-card:hover .currency-copy-hint {
+  color: var(--emerald-500);
+}
+
+/* ─── Editor de taxas ────────────────────────────────── */
+.rates-editor {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.rates-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--text-400);
+  transition: color 0.15s;
+}
+
+.rates-toggle:hover {
+  color: var(--text-700);
+}
+
+.rates-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rates-toggle-icon {
+  font-size: 1rem;
+}
+
+.rates-chevron {
+  font-size: 0.65rem;
+  color: var(--text-300);
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.rates-chevron.open {
+  transform: rotate(180deg);
+}
+
+.rates-body {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.rates-body.open {
+  display: grid;
+}
+
+.rate-field label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--text-400);
+  margin-bottom: 0.4rem;
+}
+
+.rate-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rate-input-wrap:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px var(--ring-focus);
+}
+
+.rate-flag {
+  padding: 0 0.625rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  background: var(--stone-50);
+  border-right: 1px solid var(--border);
+}
+
+.rate-input {
+  flex: 1;
+  height: 2.4rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-700);
+  padding: 0 0.75rem;
+  width: 100%;
+}
+
+/* ─── Footer ─────────────────────────────────────────── */
+.converter-footer {
+  text-align: center;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--text-300);
+  padding-top: 0.5rem;
+}
+
+.converter-footer a {
+  color: var(--emerald-400);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.converter-footer a:hover {
+  color: var(--emerald-600);
+}
+
+/* ─── Toast ──────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(1rem);
+  background: var(--emerald-400);
+  color: #1c1917;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 16px rgba(52,211,153,0.35);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.25s, transform 0.25s;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Responsivo ─────────────────────────────────────── */
+@media (max-width: 480px) {
+  .currencies-grid,
+  .rates-body {
+    grid-template-columns: 1fr;
+  }
+
+  .converter-card {
+    padding: 1.25rem;
+  }
+}

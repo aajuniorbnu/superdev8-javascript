@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro de Produto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/produto.css" />
+</head>
+<body>
+
+<div class="wrapper">
+  <header>
+    <p class="eyebrow">Estoque / Produtos</p>
+    <h1>Cadastro de<br>Produto</h1>
+    <p>Preencha os dados do produto conforme a categoria.</p>
+  </header>
+
+  <div class="card">
+    <form id="form-produto" novalidate>
+
+      <!-- Nome do produto -->
+      <div class="form-group">
+        <label for="nome-produto">Nome do Produto</label>
+        <input type="text" id="nome-produto" name="nomeProduto" placeholder="Ex: Camiseta Azul M" required />
+      </div>
+
+      <!-- Preço -->
+      <div class="form-group">
+        <label for="preco">Preço (R$)</label>
+        <input type="text" id="preco" name="preco" placeholder="0,00" maxlength="12" />
+      </div>
+
+      <!-- Quantidade -->
+      <div class="form-group">
+        <label for="quantidade">Quantidade em Estoque</label>
+        <input type="text" id="quantidade" name="quantidade" placeholder="0" maxlength="6" />
+      </div>
+
+      <!-- Categoria -->
+      <div class="tipo-group form-group">
+        <label>Categoria do Produto</label>
+        <div class="radio-options">
+          <div class="radio-option">
+            <input type="radio" name="categoria" id="categoria-fisico" value="fisico" />
+            <label class="radio-label" for="categoria-fisico">Produto Físico</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="categoria" id="categoria-digital" value="digital" />
+            <label class="radio-label" for="categoria-digital">Produto Digital</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divisor Físico — oculto por padrão -->
+      <div class="section-divider" id="divider-fisico" style="display: none;">
+        <span>Dados do Produto Físico</span>
+      </div>
+
+      <!-- Campos Produto Físico — ocultos por padrão -->
+      <div id="tipo-fisico" style="display: none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="peso">Peso (kg)</label>
+            <input type="text" id="peso" name="peso" placeholder="0,000" maxlength="8" />
+          </div>
+          <div class="form-group">
+            <label for="dimensoes">Dimensões (cm)</label>
+            <input type="text" id="dimensoes" name="dimensoes" placeholder="AxLxP" maxlength="15" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="codigo-barras">Código de Barras (EAN-13)</label>
+          <input type="text" id="codigo-barras" name="codigoBarras" placeholder="0000000000000" maxlength="13" />
+        </div>
+      </div>
+
+      <!-- Divisor Digital — oculto por padrão -->
+      <div class="section-divider" id="divider-digital" style="display: none;">
+        <span>Dados do Produto Digital</span>
+      </div>
+
+      <!-- Campos Produto Digital — ocultos por padrão -->
+      <div id="tipo-digital" style="display: none;">
+        <div class="form-group">
+          <label for="link-download">Link de Download</label>
+          <input type="text" id="link-download" name="linkDownload" placeholder="https://..." />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tamanho-arquivo">Tamanho do Arquivo</label>
+            <input type="text" id="tamanho-arquivo" name="tamanhoArquivo" placeholder="Ex: 150 MB" maxlength="10" />
+          </div>
+          <div class="form-group">
+            <label for="formato">Formato</label>
+            <input type="text" id="formato" name="formato" placeholder="Ex: PDF, ZIP" maxlength="10" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões de ação -->
+      <div class="botoes-acao">
+        <button type="button" id="btn-limpar" class="btn-secundario">Limpar</button>
+        <button type="submit" id="btn-salvar" class="btn-primario">Salvar Produto</button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Área de resumo — oculta por padrão -->
+  <div id="resumo-produto" style="display: none;">
+    <div class="section-divider" style="display: flex;">
+      <span>Resumo do Cadastro</span>
+    </div>
+    <div class="card resumo-card">
+      <p id="resumo-texto"></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="/assets/js/exercicio-produto.js"></script>
+</body>
+</html>

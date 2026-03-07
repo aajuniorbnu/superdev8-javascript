@@ -1,31 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro de Pessoa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/cadastro.css" />
 </head>
 <body>
-    <div class="nome">Nome</div>
- <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Nome completo" required />
-    <div class="tipo"> Tipo de pessoa</div>
-    <div class="cpf">CPF</div>
-    <div class="rg">RG</div>
-    <div class="data-nascimento">Data de Nascimento</div>
-    <div class="cnpj">CNPJ</div>
-    <div class="razao-social">Razão Social</div>
-    <div class="">
-        <span>Tipo de Pessoa</span>
-       
-        <input type="radio" name="tipo-pessoa" id="pf" value="pf">
-        <label for="pf">PF</label>
-        <input type="radio" name="tipo-pessoa" id="pj" value="pj">
-        <label for="pj">PJ</label>
 
-    </div>
-    
-</body>
+<div class="wrapper">
+  <header>
+    <p class="eyebrow">Sistema de Cadastro</p>
+    <h1>Novo Cadastro<br>de Pessoa</h1>
+    <p>Preencha os dados conforme o tipo de pessoa.</p>
+  </header>
+
+  <div class="card">
+    <form id="form-cadastro" novalidate>
+
+      <!-- Nome -->
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome completo" required />
+      </div>
+
+      <!-- Tipo PF / PJ -->
+      <div class="tipo-group form-group">
+        <label>Tipo de Pessoa</label>
+        <div class="radio-options">
+          <div class="radio-option">
+            <input type="radio" name="tipo" id="tipo-pf-radio" value="PF" />
+            <label class="radio-label" for="tipo-pf-radio">Pessoa Física</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="tipo" id="tipo-pj-radio" value="PJ" />
+            <label class="radio-label" for="tipo-pj-radio">Pessoa Jurídica</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divisor PF — oculto por padrão -->
+      <div class="section-divider" id="divider-pf" style="display: none;">
+        <span>Dados Pessoa Física</span>
+      </div>
+
+      <!-- Campos PF — ocultos por padrão -->
+      <div id="tipo-pf" style="display: none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" />
+          </div>
+          <div class="form-group">
+            <label for="rg">RG</label>
+            <input type="text" id="rg" name="rg" placeholder="00.000.000-0" maxlength="12" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nascimento">Data de Nascimento</label>
+          <input type="date" id="nascimento" name="nascimento" />
+        </div>
+      </div>
+
+      <!-- Divisor PJ — oculto por padrão -->
+      <div class="section-divider" id="divider-pj" style="display: none;">
+        <span>Dados Pessoa Jurídica</span>
+      </div>
+
+      <!-- Campos PJ — ocultos por padrão -->
+      <div id="tipo-pj" style="display: none;">
+        <div class="form-group">
+          <label for="cnpj">CNPJ</label>
+          <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" maxlength="18" />
+        </div>
+        <div class="form-group">
+          <label for="razao-social">Razão Social</label>
+          <input type="text" id="razao-social" name="razaoSocial" placeholder="Nome da empresa" />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Cadastrar</button>
+    </form>
+  </div>
+
+  <p class="note">Campos marcados com <span>*</span> são obrigatórios.</p>
+</div>
+
 <script src="/assets/js/cadastro.js"></script>
+</body>
 </html>
